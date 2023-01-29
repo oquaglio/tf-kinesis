@@ -30,9 +30,29 @@ resource "aws_iam_policy" "kinesis_policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Action   = ["kinesis:DescribeStream"]
+        Action = [
+          "kinesis:DescribeStream",
+          "kinesis:GetShardIterator",
+          "kinesis:GetRecords",
+          "kinesis:ListShards"
+        ]
         Effect   = "Allow"
         Resource = "*"
+      },
+      {
+        Effect : "Allow",
+        Action : [
+          "s3:AbortMultipartUpload",
+          "s3:GetBucketLocation",
+          "s3:GetObject",
+          "s3:ListBucket",
+          "s3:ListBucketMultipartUploads",
+          "s3:PutObject"
+        ],
+        Resource : [
+          aws_s3_bucket.bucket.arn,
+          "${aws_s3_bucket.bucket.arn}/*"
+        ]
       }
     ]
   })
