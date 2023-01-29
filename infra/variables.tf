@@ -5,8 +5,8 @@ variable "stack_name" {
   })
 
   default = {
-    hyphenated  = "tf-kinesis"
-    underscored = "tf_kinesis"
+    hyphenated  = "tf-kinesis-test"
+    underscored = "tf_kinesis_test"
   }
 }
 
